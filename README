@@ -1,3 +1,10 @@
+litecoinj is a java implementation of litecoin. In order for the mobile wallet to work we first need to modify litecoinj to work with credits.
+
+The majority of the important parameters specific to Credits will be located in
+core/src/main/java/net/usecredits/credits/core/NetworkParameters.java 
+
+-----------------------------
+
 To get started, ensure you have the latest JDK installed, and download Maven from:
 
   http://maven.apache.org/
