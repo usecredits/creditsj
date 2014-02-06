@@ -145,15 +145,15 @@ public class NetworkParameters implements Serializable {
             acceptableAddressCodes = new int[] { 48 };
             dumpedPrivateKeyHeader = 128;
             addressHeader = 48;
-            if(type == 100) port = 10333;
-            else port = 9333;
+            if(type == 100) port = 10333; //Testnet port
+            else port = 51119;
             packetMagic = 0xfbc0b6db;
             genesisBlock.setDifficultyTarget(0x1e0ffff0L);
             genesisBlock.setTime(1317972665L);
             genesisBlock.setNonce(2084524493L);
             genesisBlock.setMerkleRoot(new Sha256Hash("97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
             id = ID_PRODNET;
-            subsidyDecreaseBlockCount = 840000;
+            subsidyDecreaseBlockCount = 840000; //Block halves every 840000 for Litecoin
             allowEmptyPeerChains = false;
             spendableCoinbaseDepth = 100;
             String genesisHash = genesisBlock.getHashAsString();
@@ -279,8 +279,8 @@ public class NetworkParameters implements Serializable {
         return genesisBlock;
     }
 
-    public static final int TARGET_TIMESPAN = (int)(3.5 * 24 * 60 * 60);  // 3.5 days per difficulty cycle, on average.
-    public static final int TARGET_SPACING = (int)(2.5 * 60);  // 2.5 minutes per block.
+    public static final int TARGET_TIMESPAN = (int)(1);  // Difficulty retarget every block(?)
+    public static final int TARGET_SPACING = (int)(40);  // 40 seconds per block
     public static final int INTERVAL = TARGET_TIMESPAN / TARGET_SPACING;
     
     /**
@@ -293,7 +293,7 @@ public class NetworkParameters implements Serializable {
     /**
      * The maximum money to be generated
      */
-    public static final BigInteger MAX_MONEY = new BigInteger("84000000", 10).multiply(COIN);
+    public static final BigInteger MAX_MONEY = new BigInteger("20000000000", 10).multiply(COIN);
 
     /** Returns whatever the latest testNet parameters are.  Use this rather than the versioned equivalents. */
     public static NetworkParameters testNet() {
