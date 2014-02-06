@@ -33,6 +33,8 @@ import java.util.List;
 import static org.cryptocredits.credits.core.Utils.doubleDigest;
 import static org.cryptocredits.credits.core.Utils.scryptDigest;
 import static org.cryptocredits.credits.core.Utils.doubleDigestTwoBuffers;
+import static org.cryptocredits.credits.core.Utils.COIN; //Added for block reward algorithm
+
 
 /**
  * <p>A block is a group of transactions, and is one of the fundamental data structures of the Litecoin system.
@@ -140,8 +142,20 @@ public class Block extends Message {
      * <p>The half-life is controlled by {@link org.cryptocredits.credits.core.NetworkParameters#getSubsidyDecreaseBlockCount()}.
      * </p>
      */
+	 
+	 //This is the block reward algorithm
     public BigInteger getBlockInflation(int height) {
-        return Utils.toNanoCoins(50, 0).shiftRight(height / params.getSubsidyDecreaseBlockCount());
+		int reward = 100 * COIN;
+		if(height < 1577857)//If less than 2 years have passed since the first block
+        {
+                reward = COIN * (796 + (500 * (height / 65744)));
+        }
+        else
+        {
+                int reward = 6546 * COIN;//Initial reward for halving is 6546
+                reward >>= (height / 1577856); //halve block reward every 2 years, 1577856 blocks
+        }
+        return Utils.toNanoCoins(50, 0).shiftRight(reward);
     }
 
     private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
