@@ -153,7 +153,7 @@ public class NetworkParameters implements Serializable {
             genesisBlock.setNonce(2084524493L);
             genesisBlock.setMerkleRoot(new Sha256Hash("97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
             id = ID_PRODNET;
-            subsidyDecreaseBlockCount = 840000; //Block halves every 840000 for Litecoin
+            subsidyDecreaseBlockCount = 840000; //Block halving, no longer necessary
             allowEmptyPeerChains = false;
             spendableCoinbaseDepth = 100;
             String genesisHash = genesisBlock.getHashAsString();
