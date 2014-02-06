@@ -143,17 +143,17 @@ public class Block extends Message {
      * </p>
      */
 	 
-	 //This is the block reward algorithm
+	//This is the block reward algorithm
     public BigInteger getBlockInflation(int height) {
 		int reward = 100 * COIN;
-		if(height < 1577857)//If less than 2 years have passed since the first block
+		if(height < 1577857)
         {
                 reward = COIN * (796 + (500 * (height / 65744)));
         }
         else
         {
-                int reward = 6546 * COIN;//Initial reward for halving is 6546
-                reward >>= (height / 1577856); //halve block reward every 2 years, 1577856 blocks
+                int reward = 6546 * COIN;
+                reward >>= (height / 1577856);
         }
         return Utils.toNanoCoins(50, 0).shiftRight(reward);
     }
